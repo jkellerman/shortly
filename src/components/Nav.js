@@ -10,7 +10,7 @@ const StyledNav = styled.nav`
   padding: 2.5rem 0;
   position: relative;
 
-  @media (${device.mobileL}) {
+  @media (${device.tablet}) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,7 +24,7 @@ const NavMenu = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  @media (${device.mobileL}) {
+  @media (${device.tablet}) {
     display: block;
     justify-content: flex-start;
     width: unset;
@@ -34,14 +34,14 @@ const NavMenu = styled.div`
 const Logo = styled.div`
   display: flex;
   align-self: center;
-  @media (${device.mobileL}) {
+  @media (${device.tablet}) {
     margin-right: 3rem;
     align-self: center;
   }
 `;
 
 const Hamburger = styled.div`
-  @media (${device.mobileL}) {
+  @media (${device.tablet}) {
     display: none;
   }
 `;
@@ -56,7 +56,8 @@ const NavContainer = styled.div`
   padding: 2rem 1.5rem;
   color: #fff;
   font-weight: 700;
-  @media (${device.mobileL}) {
+  z-index: 5;
+  @media (${device.tablet}) {
     display: flex;
     position: unset;
     top: unset;
@@ -64,6 +65,7 @@ const NavContainer = styled.div`
     border-radius: unset;
     padding: unset;
     color: #9e9aa8;
+    z-index: unset;
   }
 `;
 
@@ -72,7 +74,7 @@ const Line = styled.hr`
   width: 100%;
   margin: 1.875rem auto;
 
-  @media (${device.mobileL}) {
+  @media (${device.tablet}) {
     display: none;
   }
 `;
@@ -93,12 +95,16 @@ const Link = styled.li`
     color: #34313d;
     transition: all 0.2s ease-in;
   }
-  @media (${device.mobileL}) {
-    font-size: 0.9375rem;
+  @media (${device.tablet}) {
+    font-size: 0.8rem;
     display: inline-block;
     margin-right: 2rem;
     text-align: unset;
     margin-bottom: unset;
+  }
+
+  @media (${device.laptop}) {
+    font-size: 0.9375rem;
   }
 `;
 
@@ -106,7 +112,7 @@ const LoginMenu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.3125rem;
-  @media (${device.mobileL}) {
+  @media (${device.tablet}) {
     flex-direction: row;
     width: 70%;
     justify-content: flex-end;

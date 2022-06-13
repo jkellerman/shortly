@@ -16,8 +16,11 @@ const StyledButton = styled.button`
   }};
   padding: ${({ nav, cta, shortenIt, copy }) => {
     if (nav) return "0.75em 0";
-    else if (cta) return "0.75em 2.5em";
+    else if (cta) return "0.75em 2em";
     else if (shortenIt || copy) return "0.625em";
+  }};
+  max-width: ${({ cta }) => {
+    if (cta) return "197px";
   }};
 
   &:hover {
@@ -39,6 +42,18 @@ const StyledButton = styled.button`
       if (nav) return "0.5em 1.5em";
       else if (login) return "0em";
     }};
+
+    @media (${device.tablet}) {
+      font-size: ${({ nav, copy, login }) => {
+        if (nav || copy || login) return "0.8rem";
+      }};
+    }
+
+    @media (${device.laptop}) {
+      font-size: ${({ nav, copy, login }) => {
+        if (nav || copy || login) return "0.9375rem";
+      }};
+    }
   }
 `;
 

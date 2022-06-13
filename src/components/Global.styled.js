@@ -16,7 +16,7 @@ body {
   background-color: hsla(225, 32%, 95%, 1);
 }
 
-@media (max-width: 609px){
+@media (max-width: 767px){
   .show {
   display: block;
 }
@@ -32,17 +32,19 @@ body {
 const size = {
   mobileS: "320px",
   mobileM: "375px",
-  mobileL: "610px",
+  mobileL: "480px",
   tablet: "768px",
-  laptop: "1024px",
+  tabletL: "1024px",
+  laptop: "1200px",
   desktop: "1600px",
 };
 
 export const device = {
-  mobileS: `min-width: ${size.mobileS}`,
+  mobileS: `max-width: ${size.mobileS}`,
   mobileM: `min-width: ${size.mobileM}`,
   mobileL: `min-width: ${size.mobileL}`,
   tablet: `min-width: ${size.tablet}`,
+  tabletL: `min-width: ${size.tabletL}`,
   laptop: `min-width: ${size.laptop}`,
   desktop: `min-width: ${size.desktop}`,
 };
