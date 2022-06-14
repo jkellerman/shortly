@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { device } from "./Global.styled";
 
 const StyledButton = styled.button`
-  background-color: ${({ primary }) => (primary ? "#2BD0D0" : "transparent")};
+  background-color: ${({ primary, secondary }) =>
+    primary || secondary ? "#2BD0D0" : "transparent"};
   border: none;
   color: #fff;
   font-weight: 700;
@@ -23,6 +24,8 @@ const StyledButton = styled.button`
     if (cta) return "197px";
   }};
 
+  white-space: nowrap;
+
   &:hover {
     background-color: ${({ login }) => (login ? "transparent" : "#9ae3e3")};
     transition: all 0.2s ease-in;
@@ -37,10 +40,12 @@ const StyledButton = styled.button`
       if (nav || copy || login) return "0.9375rem";
       else if (shortenIt) return "1.25rem";
     }};
-    color: ${({ primary }) => (primary ? "#fff" : "#9e9aa8")};
-    padding: ${({ nav, login }) => {
+    color: ${({ primary, secondary }) =>
+      primary || secondary ? "#fff" : "#9e9aa8"};
+    padding: ${({ nav, login, shortenIt }) => {
       if (nav) return "0.5em 1.5em";
       else if (login) return "0em";
+      else if (shortenIt) return "1rem 2.5rem";
     }};
 
     @media (${device.tablet}) {
