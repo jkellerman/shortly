@@ -22,9 +22,11 @@ const HeroContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 5.5rem;
+  padding-bottom: 4rem;
 
   @media (${device.tablet}) {
     flex-direction: row-reverse;
+    padding-bottom: unset;
   }
 
   @media (${device.laptop}) {

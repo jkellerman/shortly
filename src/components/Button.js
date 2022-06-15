@@ -9,6 +9,7 @@ const StyledButton = styled.button`
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
+  white-space: nowrap;
   border-radius: ${({ primary }) => (primary ? "28px" : "5px")};
   font-size: ${({ nav, cta, shortenIt, copy, login }) => {
     if (nav || shortenIt || login) return "1.125rem";
@@ -23,8 +24,6 @@ const StyledButton = styled.button`
   max-width: ${({ cta }) => {
     if (cta) return "197px";
   }};
-
-  white-space: nowrap;
 
   &:hover {
     background-color: ${({ login }) => (login ? "transparent" : "#9ae3e3")};
@@ -42,10 +41,11 @@ const StyledButton = styled.button`
     }};
     color: ${({ primary, secondary }) =>
       primary || secondary ? "#fff" : "#9e9aa8"};
-    padding: ${({ nav, login, shortenIt }) => {
+    padding: ${({ nav, login, shortenIt, copy }) => {
       if (nav) return "0.5em 1.5em";
       else if (login) return "0em";
       else if (shortenIt) return "1rem 2.5rem";
+      else if (copy) return "0.625rem 2rem";
     }};
 
     @media (${device.tablet}) {
@@ -71,6 +71,7 @@ const Button = ({
   secondary,
   text,
   login,
+  onClick,
 }) => {
   return (
     <StyledButton
@@ -81,6 +82,7 @@ const Button = ({
       shortenIt={shortenIt}
       secondary={secondary}
       login={login}
+      onClick={onClick}
     >
       {text}
     </StyledButton>
