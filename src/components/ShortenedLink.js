@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Button from "./Button";
-import { device } from "./Global.styled";
+import { device } from "./Global.styles";
 
 const LinkContainer = styled.div`
   width: 100%;
   background-color: #fff;
   padding: 1rem;
-  margin-bottom: 4.75rem;
+  margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -61,13 +61,15 @@ const StyledDiv = styled.div`
   }
 `;
 
-const ShortenedLink = ({ originalLink, shortenedLink, id }) => {
+const ShortenedLink = ({ originalLink, shortenedLink }) => {
   return (
-    <LinkContainer key={id}>
+    <LinkContainer>
       <OriginalLink>{originalLink}</OriginalLink>
       <StyledDiv>
         <StyledShortenedLink>{shortenedLink}</StyledShortenedLink>
-        <Button copy secondary text="Copy" />
+        <Button copy secondary>
+          Copy
+        </Button>
       </StyledDiv>
     </LinkContainer>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
-import { device } from "./Global.styled";
+import { device } from "./Global.styles";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -143,8 +143,10 @@ const Nav = () => {
         </NavList>
         <Line />
         <LoginMenu>
-          <Button text="Login" login />
-          <Button text="Sign Up" primary nav />
+          <Button login>Login</Button>
+          <Button primary nav>
+            Sign Up
+          </Button>
         </LoginMenu>
       </NavContainer>
     </StyledNav>

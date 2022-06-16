@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "./Global.styled";
+import { device } from "./Global.styles";
 
 const StyledButton = styled.button`
   background-color: ${({ primary, secondary }) =>
@@ -20,9 +20,6 @@ const StyledButton = styled.button`
     if (nav) return "0.75em 0";
     else if (cta) return "0.75em 2em";
     else if (shortenIt || copy) return "0.625em";
-  }};
-  max-width: ${({ cta }) => {
-    if (cta) return "197px";
   }};
 
   &:hover {
@@ -52,6 +49,12 @@ const StyledButton = styled.button`
       font-size: ${({ nav, copy, login }) => {
         if (nav || copy || login) return "0.8rem";
       }};
+      min-width: ${({ shortenIt }) => {
+        if (shortenIt) return "188px";
+      }};
+      min-height: ${({ shortenIt }) => {
+        if (shortenIt) return "64px";
+      }};
     }
 
     @media (${device.laptop}) {
@@ -69,9 +72,10 @@ const Button = ({
   shortenIt,
   primary,
   secondary,
-  text,
   login,
   onClick,
+  children,
+  disabled,
 }) => {
   return (
     <StyledButton
@@ -83,8 +87,9 @@ const Button = ({
       secondary={secondary}
       login={login}
       onClick={onClick}
+      disabled={disabled}
     >
-      {text}
+      {children}
     </StyledButton>
   );
 };

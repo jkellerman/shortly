@@ -1,4 +1,4 @@
-import GlobalStyles from "./components/Global.styled";
+import GlobalStyles from "./components/Global.styles";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import LinkShortener from "./components/LinkShortener";

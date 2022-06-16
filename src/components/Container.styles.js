@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "./Global.styled";
+import { device } from "./Global.styles";
 
 const Container = styled.div`
   margin: 0 auto;

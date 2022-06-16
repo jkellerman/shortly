@@ -16,6 +16,7 @@ body {
   background-color: hsla(225, 32%, 95%, 1);
 }
 
+
 @media (max-width: 767px){
   .show {
   display: block;

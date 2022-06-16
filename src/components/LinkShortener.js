@@ -1,16 +1,18 @@
 import styled from "styled-components";
-import Container from "./Container.styled";
+import Container from "./Container.styles";
 import Button from "./Button";
-import { device } from "./Global.styled";
+import { device } from "./Global.styles";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ShortenedLink from "./ShortenedLink";
+import LoadingAnimation from "./LoadingAnimation";
 
 const Background = styled.div`
   background-color: #3a3054;
   background-image: url("../images/bg-shorten-mobile.svg");
   background-repeat: no-repeat;
   background-position: top right;
+  background-size: cover;
   padding: 1.5rem;
   border-radius: 10px;
   position: relative;
@@ -23,7 +25,7 @@ const Background = styled.div`
     top: -4rem;
   }
 
-  @media (${device.laptop}) {
+  @media (${device.tabletL}) {
     padding: 3.25rem 4rem;
   }
 `;
@@ -34,6 +36,7 @@ const Form = styled.form`
 
   @media (${device.tablet}) {
     flex-direction: row;
+    min-height: 64px;
   }
 `;
 
@@ -76,22 +79,30 @@ const List = styled.div`
 const LinkShortener = () => {
   const [input, setInput] = useState("");
   const [list, setList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const listRef = useRef(null);
 
   const getShortenedLink = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     axios
       .get(`https://api.shrtco.de/v2/shorten?url=${input}`)
       .then((resp) => {
         const listItem = {
-          id: new Date().valueOf.toString(),
           originalLink: resp.data.result.original_link,
           shortenedLink: resp.data.result.full_short_link2,
         };
-        setList([...list].concat(listItem));
+        setTimeout(() => {
+          setList([...list].concat(listItem));
+          setIsLoading(false);
+          listRef.current.scrollIntoView({ block: "end", behaviour: "smooth" });
+        }, 1000);
       })
-      .catch(console.error);
+      .catch(() => {
+        setIsLoading(false);
+      });
 
-    setInput((prevInput) => "");
+    setInput("");
   };
 
   const handleChange = (event) => {
@@ -99,11 +110,10 @@ const LinkShortener = () => {
     setInput((prevInput) => value);
   };
 
-  const links = list.map((link) => {
+  const links = list.map((link, index) => {
     return (
       <ShortenedLink
-        key={link.id}
-        id={link.id}
+        key={index}
         originalLink={link.originalLink}
         shortenedLink={link.shortenedLink}
       />
@@ -123,10 +133,12 @@ const LinkShortener = () => {
             onChange={handleChange}
             value={input}
           />
-          <Button type="submit" text="Shorten It!" shortenIt secondary />
+          <Button type="submit" shortenIt secondary disabled={isLoading}>
+            {isLoading ? <LoadingAnimation /> : "Shorten It"}
+          </Button>
         </Form>
       </Background>
-      <List>{links}</List>
+      <List ref={listRef}>{links}</List>
     </Container>
   );
 };

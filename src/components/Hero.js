@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Container from "./Container.styled";
-import { device } from "./Global.styled";
+import Container from "./Container.styles";
+import { device } from "./Global.styles";
 import Button from "./Button";
 
 const StyledHero = styled.div`
@@ -131,7 +131,9 @@ const Hero = () => {
               Build your brand's recognition and get detailed insights on how
               your links are performing.
             </HeroDescription>
-            <Button primary cta text="Get Started" />
+            <Button primary cta>
+              Get Started
+            </Button>
           </CTAContainer>
         </HeroContainer>
       </Container>
