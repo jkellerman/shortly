@@ -77,7 +77,7 @@ const List = styled.div`
 `;
 
 const LinkShortener = () => {
-  const [input, setInput] = useState("");
+  const inputRef = useRef();
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const listRef = useRef(null);
@@ -86,7 +86,7 @@ const LinkShortener = () => {
     e.preventDefault();
     setIsLoading(true);
     axios
-      .get(`https://api.shrtco.de/v2/shorten?url=${input}`)
+      .get(`https://api.shrtco.de/v2/shorten?url=${inputRef.current.value}`)
       .then((resp) => {
         const listItem = {
           originalLink: resp.data.result.original_link,
@@ -102,12 +102,7 @@ const LinkShortener = () => {
         setIsLoading(false);
       });
 
-    setInput("");
-  };
-
-  const handleChange = (event) => {
-    const { value } = event.target;
-    setInput((prevInput) => value);
+    inputRef.current.value = "";
   };
 
   const links = list.map((link, index) => {
@@ -130,8 +125,7 @@ const LinkShortener = () => {
             type="text"
             placeholder="Shorten a link here..."
             autoComplete="off"
-            onChange={handleChange}
-            value={input}
+            ref={inputRef}
           />
           <Button type="submit" shortenIt secondary disabled={isLoading}>
             {isLoading ? <LoadingAnimation /> : "Shorten It"}

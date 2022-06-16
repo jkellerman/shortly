@@ -10,8 +10,6 @@ const scaling = keyframes`
     100%{
         transform: scale(0);
     }
-
-
 `;
 
 const AnimationContainer = styled.div``;
