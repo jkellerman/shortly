@@ -2,14 +2,23 @@ import styled from "styled-components";
 import { device } from "./Global.styles";
 
 const StyledButton = styled.button`
-  background-color: ${({ primary, secondary }) =>
-    primary || secondary ? "#2BD0D0" : "transparent"};
   border: none;
   color: #fff;
   font-weight: 700;
   font-family: inherit;
-  cursor: pointer;
   white-space: nowrap;
+
+  background-color: ${({ copied }) => (copied ? "#3A3054" : "#2BD0D0")};
+  background-color: ${({ login }) => {
+    if (login) return "transparent";
+  }};
+  cursor: ${({ copied }) => (copied ? "default" : "pointer")};
+  display: ${({ copy }) => {
+    if (copy) return "flex";
+  }};
+  justify-content: ${({ copy }) => {
+    if (copy) return "center";
+  }};
   border-radius: ${({ primary }) => (primary ? "28px" : "5px")};
   font-size: ${({ nav, cta, shortenIt, copy, login }) => {
     if (nav || shortenIt || login) return "1.125rem";
@@ -23,7 +32,10 @@ const StyledButton = styled.button`
   }};
 
   &:hover {
-    background-color: ${({ login }) => (login ? "transparent" : "#9ae3e3")};
+    background-color: ${({ copied }) => (copied ? "#3A3054" : "#9ae3e3")};
+    background-color: ${({ login }) => {
+      if (login) return "transparent";
+    }};
     transition: all 0.2s ease-in;
     color: ${({ login }) => {
       if (login) return "#34313d";
@@ -55,6 +67,12 @@ const StyledButton = styled.button`
       min-height: ${({ shortenIt }) => {
         if (shortenIt) return "64px";
       }};
+      width: ${({ copy }) => {
+        if (copy) return "103px";
+      }};
+      max-width: ${({ copy }) => {
+        if (copy) return "103px";
+      }};
     }
 
     @media (${device.laptop}) {
@@ -76,6 +94,7 @@ const Button = ({
   onClick,
   children,
   disabled,
+  copied,
 }) => {
   return (
     <StyledButton
@@ -88,6 +107,7 @@ const Button = ({
       login={login}
       onClick={onClick}
       disabled={disabled}
+      copied={copied}
     >
       {children}
     </StyledButton>

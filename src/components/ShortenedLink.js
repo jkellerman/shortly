@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Button from "./Button";
 import { device } from "./Global.styles";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useState } from "react";
 
 const LinkContainer = styled.div`
   width: 100%;
@@ -62,14 +64,25 @@ const StyledDiv = styled.div`
 `;
 
 const ShortenedLink = ({ originalLink, shortenedLink }) => {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const copy = () => {
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
+
   return (
     <LinkContainer>
       <OriginalLink>{originalLink}</OriginalLink>
       <StyledDiv>
         <StyledShortenedLink>{shortenedLink}</StyledShortenedLink>
-        <Button copy secondary>
-          Copy
-        </Button>
+        <CopyToClipboard text={shortenedLink}>
+          <Button copy secondary onClick={copy} copied={isCopied}>
+            {isCopied ? "Copied!" : "Copy"}
+          </Button>
+        </CopyToClipboard>
       </StyledDiv>
     </LinkContainer>
   );
