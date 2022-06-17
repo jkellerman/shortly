@@ -23,9 +23,6 @@ const Background = styled.div`
     flex-direction: row;
     justify-content: space-between;
     top: -4rem;
-  }
-
-  @media (${device.tabletL}) {
     padding: 3.25rem 4rem;
   }
 `;
@@ -33,6 +30,7 @@ const Background = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  position: relative;
 
   @media (${device.tablet}) {
     flex-direction: row;
@@ -44,6 +42,20 @@ const Label = styled.label`
   display: none;
 `;
 
+const ErrorMessage = styled.div`
+  display: none;
+  font-size: 0.75rem;
+  color: #f46363;
+  font-style: italic;
+  position: relative;
+  top: -0.5rem;
+  @media (${device.tablet}) {
+    font-size: 1rem;
+    top: 4.25rem;
+    position: absolute;
+  }
+`;
+
 const Input = styled.input`
   width: 100%;
   margin-bottom: 1rem;
@@ -52,12 +64,20 @@ const Input = styled.input`
   border-radius: 5px;
   border: none;
   font-family: inherit;
-  color: #34313d;
   margin-right: 1.5rem;
+  color: #34313d;
+
+  &:invalid {
+    border: 2px solid #f46363;
+  }
+
+  &:invalid ~ ${ErrorMessage} {
+    display: block;
+  }
 
   &::placeholder {
     font-size: 1rem;
-    color: #34313d;
+    color: inherit;
     opacity: 0.7;
     font-family: inherit;
   }
@@ -77,16 +97,17 @@ const List = styled.div`
 `;
 
 const LinkShortener = () => {
-  const inputRef = useRef();
+  const [input, setInput] = useState("");
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const listRef = useRef(null);
+  const [error, setError] = useState(false);
 
   const getShortenedLink = (e) => {
     e.preventDefault();
     setIsLoading(true);
     axios
-      .get(`https://api.shrtco.de/v2/shorten?url=${inputRef.current.value}`)
+      .get(`https://api.shrtco.de/v2/shorten?url=${input}`)
       .then((resp) => {
         const listItem = {
           originalLink: resp.data.result.original_link,
@@ -100,9 +121,16 @@ const LinkShortener = () => {
       })
       .catch(() => {
         setIsLoading(false);
+        setError(true);
       });
 
-    inputRef.current.value = "";
+    input === "" && getShortenedLink ? setError(true) : setError(false);
+    setInput("");
+  };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setInput(value);
   };
 
   const links = list.map((link, index) => {
@@ -122,11 +150,14 @@ const LinkShortener = () => {
           <Label htmlFor="input">Input:</Label>
           <Input
             id="input"
-            type="text"
+            type="url"
             placeholder="Shorten a link here..."
             autoComplete="off"
-            ref={inputRef}
+            onChange={handleChange}
+            value={input}
+            required={error ? true : false}
           />
+          <ErrorMessage>Please add a link</ErrorMessage>
           <Button type="submit" shortenIt secondary disabled={isLoading}>
             {isLoading ? <LoadingAnimation /> : "Shorten It"}
           </Button>
