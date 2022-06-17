@@ -3,7 +3,7 @@ import Container from "./Container.styles";
 import Button from "./Button";
 import { device } from "./Global.styles";
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ShortenedLink from "./ShortenedLink";
 import LoadingAnimation from "./LoadingAnimation";
 
@@ -98,7 +98,9 @@ const List = styled.div`
 
 const LinkShortener = () => {
   const [input, setInput] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(
+    () => JSON.parse(localStorage.getItem("shortly-links")) || []
+  );
   const [isLoading, setIsLoading] = useState(false);
   const listRef = useRef(null);
   const [error, setError] = useState(false);
@@ -127,6 +129,10 @@ const LinkShortener = () => {
     input === "" && getShortenedLink ? setError(true) : setError(false);
     setInput("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("shortly-links", JSON.stringify(list));
+  }, [list]);
 
   const handleChange = (e) => {
     const { value } = e.target;
