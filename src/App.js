@@ -1,3 +1,4 @@
+import FeatureSection from "./components/FeatureSection";
 import GlobalStyles from "./components/Global.styles";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -10,6 +11,7 @@ const App = () => {
       <Header />
       <Hero />
       <LinkShortener />
+      <FeatureSection />
     </>
   );
 };

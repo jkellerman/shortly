@@ -3,7 +3,7 @@ import Container from "./Container.styles";
 import { device } from "./Global.styles";
 import Button from "./Button";
 
-const StyledHero = styled.div`
+const StyledHero = styled.section`
   background-color: #fff;
   display: flex;
   position: relative;

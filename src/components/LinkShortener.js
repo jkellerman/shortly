@@ -51,7 +51,7 @@ const ErrorMessage = styled.div`
   top: -0.5rem;
   @media (${device.tablet}) {
     font-size: 1rem;
-    top: 4.25rem;
+    top: 4.5rem;
     position: absolute;
   }
 `;
@@ -68,7 +68,7 @@ const Input = styled.input`
   color: #34313d;
 
   &:invalid {
-    border: 2px solid #f46363;
+    border: 3px solid #f46363;
   }
 
   &:invalid ~ ${ErrorMessage} {
