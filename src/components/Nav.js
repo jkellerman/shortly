@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import { device } from "./Global.styles";
+import Logo from "./Logo";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -28,15 +29,6 @@ const NavMenu = styled.div`
     display: block;
     justify-content: flex-start;
     width: unset;
-  }
-`;
-
-const Logo = styled.div`
-  display: flex;
-  align-self: center;
-  @media (${device.tablet}) {
-    margin-right: 3rem;
-    align-self: center;
   }
 `;
 
@@ -128,9 +120,7 @@ const Nav = () => {
   return (
     <StyledNav>
       <NavMenu>
-        <Logo>
-          <img src="../images/logo.svg" alt="logo" />
-        </Logo>
+        <Logo header />
         <Hamburger onClick={toggleMenu}>
           <img src="../images/icon-hamburger.svg" alt="hamburger" />
         </Hamburger>

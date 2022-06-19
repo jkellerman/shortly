@@ -25,6 +25,7 @@ const StyledCTA = styled.div`
   font-size: 1.75rem;
   font-weight: 700;
   color: #fff;
+  text-align: center;
 
   @media (${device.laptop}) {
     font-size: 2.5rem;

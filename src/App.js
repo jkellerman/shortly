@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import LinkShortener from "./components/LinkShortener";
 import CTA from "./components/CTA";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <LinkShortener />
       <FeatureSection />
       <CTA />
+      <Footer />
     </>
   );
 };
