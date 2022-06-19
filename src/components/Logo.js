@@ -7,11 +7,14 @@ const StyledLogo = styled.svg`
   margin: ${({ footer }) => {
     if (footer) return "0 auto 3rem";
   }};
-  @media (${device.tabletL}) {
+
+  @media (${device.tablet}) {
     margin-right: ${({ header }) => {
       if (header) return "3rem";
     }};
+  }
 
+  @media (${device.tabletL}) {
     max-width: ${({ footer }) => {
       if (footer) return "120px";
     }};
