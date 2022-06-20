@@ -72,7 +72,7 @@ const IconsContainer = styled.div`
 const SocialMediaIcon = styled.a`
   svg > path {
     &:hover {
-      transition: all 0.2s ease-out;
+      transition: all 0.5s ease-out;
       fill: #2bd0d0;
     }
   }

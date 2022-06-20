@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import ShortenedLink from "./ShortenedLink";
 import LoadingAnimation from "./LoadingAnimation";
+import LinkShortenerInput from "./LinkShortenerInput";
 
 const Background = styled.div`
   background-color: #3a3054;
@@ -42,8 +43,7 @@ const Label = styled.label`
   display: none;
 `;
 
-const ErrorMessage = styled.div`
-  display: none;
+const ErrorMessage = styled.span`
   font-size: 0.75rem;
   color: #f46363;
   font-style: italic;
@@ -56,88 +56,73 @@ const ErrorMessage = styled.div`
   }
 `;
 
-const Input = styled.input`
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 1rem 1rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  font-family: inherit;
-  margin-right: 1.5rem;
-  color: #34313d;
-
-  &:invalid {
-    border: 3px solid #f46363;
-  }
-
-  &:invalid ~ ${ErrorMessage} {
-    display: block;
-  }
-
-  &::placeholder {
-    font-size: 1rem;
-    color: inherit;
-    opacity: 0.7;
-    font-family: inherit;
-  }
-
-  @media (${device.tablet}) {
-    margin-bottom: 0;
-    font-size: 1.25rem;
-
-    &::placeholder {
-      font-size: 1.25rem;
-    }
-  }
-`;
-
 const List = styled.div`
   width: 100%;
 `;
 
-const LinkShortener = () => {
+const LinkShortenerContainer = () => {
   const [input, setInput] = useState("");
   const [list, setList] = useState(
     () => JSON.parse(localStorage.getItem("shortly-links")) || []
   );
   const [isLoading, setIsLoading] = useState(false);
   const listRef = useRef(null);
-  const [error, setError] = useState(false);
+  const [inputError, setInputError] = useState("");
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setInput(value);
+    setInputError(null);
+  };
+
+  const validateUrl = (input) => {
+    const expression =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#&//=]*)/gi;
+    const regex = new RegExp(expression);
+
+    if (input.length <= 0)
+      return { valid: false, error: "Please provide a URL" };
+
+    if (input.match(regex)) {
+      return { valid: true, error: null };
+    } else {
+      return { valid: false, error: "Please provide a URL" };
+    }
+  };
 
   const getShortenedLink = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    axios
-      .get(`https://api.shrtco.de/v2/shorten?url=${input}`)
-      .then((resp) => {
-        const listItem = {
-          originalLink: resp.data.result.original_link,
-          shortenedLink: resp.data.result.full_short_link2,
-        };
-        setTimeout(() => {
-          setList([...list].concat(listItem));
-          setIsLoading(false);
-          listRef.current.scrollIntoView({ block: "end", behaviour: "smooth" });
-        }, 1000);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setError(true);
-      });
+    const { valid, error } = validateUrl(input);
 
-    input === "" && getShortenedLink ? setError(true) : setError(false);
+    if (valid) {
+      setIsLoading(true);
+      axios
+        .get(`https://api.shrtco.de/v2/shorten?url=${input}`)
+        .then((resp) => {
+          const listItem = {
+            originalLink: resp.data.result.original_link,
+            shortenedLink: resp.data.result.full_short_link2,
+          };
+          setTimeout(() => {
+            setList([...list].concat(listItem));
+            setIsLoading(false);
+            setInputError(error);
+            listRef.current.scrollIntoView({
+              block: "end",
+              behaviour: "smooth",
+            });
+          }, 1000);
+        });
+    } else {
+      setIsLoading(false);
+      setInputError(error);
+    }
     setInput("");
   };
 
   useEffect(() => {
     localStorage.setItem("shortly-links", JSON.stringify(list));
   }, [list]);
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setInput(value);
-  };
 
   const links = list.map((link, index) => {
     return (
@@ -154,16 +139,16 @@ const LinkShortener = () => {
       <Background>
         <Form onSubmit={getShortenedLink}>
           <Label htmlFor="input">Input:</Label>
-          <Input
+          <LinkShortenerInput
             id="input"
             type="url"
             placeholder="Shorten a link here..."
             autoComplete="off"
             onChange={handleChange}
             value={input}
-            required={error ? true : false}
+            error={inputError}
           />
-          <ErrorMessage>Please add a link</ErrorMessage>
+          <ErrorMessage>{inputError}</ErrorMessage>
           <Button type="submit" shortenIt secondary disabled={isLoading}>
             {isLoading ? <LoadingAnimation /> : "Shorten It"}
           </Button>
@@ -174,4 +159,4 @@ const LinkShortener = () => {
   );
 };
 
-export default LinkShortener;
+export default LinkShortenerContainer;

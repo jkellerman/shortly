@@ -43,7 +43,9 @@ const StyledButton = styled.button`
   }
 
   @media (${device.mobileL}) {
-    border-radius: ${({ shortenIt }) => shortenIt === "10px"};
+    border-radius: ${({ shortenIt }) => {
+      if (shortenIt) return "10px";
+    }};
     font-size: ${({ nav, copy, shortenIt, login }) => {
       if (nav || copy || login) return "0.9375rem";
       else if (shortenIt) return "1.25rem";
