@@ -60,7 +60,19 @@ const List = styled.div`
   width: 100%;
 `;
 
-const LinkShortenerContainer = () => {
+const ClearHistory = styled.div`
+  font-style: italic;
+  color: #9e9aa8;
+  text-align: center;
+  margin-bottom: 3rem;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const LinkShortener = () => {
   const [input, setInput] = useState("");
   const [list, setList] = useState(
     () => JSON.parse(localStorage.getItem("shortly-links")) || []
@@ -76,9 +88,8 @@ const LinkShortenerContainer = () => {
   };
 
   const validateUrl = (input) => {
-    const expression =
+    const regex =
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#&//=]*)/gi;
-    const regex = new RegExp(expression);
 
     if (input.length <= 0)
       return { valid: false, error: "Please provide a URL" };
@@ -107,10 +118,12 @@ const LinkShortenerContainer = () => {
             setList([...list].concat(listItem));
             setIsLoading(false);
             setInputError(error);
-            listRef.current.scrollIntoView({
-              block: "end",
-              behaviour: "smooth",
-            });
+            if (list.length >= 2) {
+              listRef.current.scrollIntoView({
+                block: "nearest",
+                behaviour: "smooth",
+              });
+            }
           }, 1000);
         });
     } else {
@@ -124,6 +137,9 @@ const LinkShortenerContainer = () => {
     localStorage.setItem("shortly-links", JSON.stringify(list));
   }, [list]);
 
+  const clearHistory = () => {
+    setList([]);
+  };
   const links = list.map((link, index) => {
     return (
       <ShortenedLink
@@ -155,8 +171,11 @@ const LinkShortenerContainer = () => {
         </Form>
       </Background>
       <List ref={listRef}>{links}</List>
+      {list.length > 0 && (
+        <ClearHistory onClick={clearHistory}>Clear History</ClearHistory>
+      )}
     </Container>
   );
 };
 
-export default LinkShortenerContainer;
+export default LinkShortener;
