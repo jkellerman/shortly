@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Frontend Mentor - Shortly URL shortening API Challenge solution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a solution to the [Shortly URL shortening API Challenge challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Preview](#preview)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### The challenge
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Users should be able to:
 
-### `npm test`
+- [x] View the optimal layout for the site depending on their device's screen size
+- [x] Shorten any valid URL
+- [x] See a list of their shortened links, even after refreshing the browser
+- [x] Copy the shortened link to their clipboard in a single click
+- [x] Receive an error message when the `form` is submitted if:
+  - [x] The `input` field is empty
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Added Features:
 
-### `npm run build`
+- [x] Loading animation
+- [x] Option for client to delete URLs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📸 Preview
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![preview](./preview.jpg)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🔗 Links
 
-### `npm run eject`
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## My process
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I love working with css and whilst I've had fun using plain old css or scss, this was an opportunity to experiment with styled components which I must say seems like a step forward, particularly when building React applications. More times than not I will build applications with a mobile first workflow which felt even more natural when working with styled components. I styled each component completely across all breakpoints with functionality before moving onto the next. You will find the styles in their components file, I felt this made it easier to go back and forth between styles and JSX, which is more cumbersome when separating concern.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+All challenges were completed and I added some extra features which I thought were necessary, including adding a spinner on the 'Shorten It' button. This will show the client that their request is loading in case the API call takes longer than expected or their network speed is slow.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+I also added a feature where they can clear their links history, just in case it gets too long.
 
-## Learn More
+### 🧰 Built with
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [React](https://reactjs.org/) - JS library
+- [Styled Components](https://styled-components.com/) - For styles
+- [Shrtcode API](https://app.shrtco.de/)
+- Mobile-first workflow
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 💡 What I learned
 
-### Code Splitting
+#### Form validation is harder in React 🫠
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+I had no issue with form functionality and I am comfortable with building a form with multiple inputs when needed, the problems I faced were to do with styling, particularly when displaying an error. I tried the approach of updating styles if input is invalid, using css (see snippet below) and then adding the "required" attribute to the input tag. The problem was that when entering any input the error message would appear before the client has submitted anything, which is annoying for user experience. After prowling docs, tutorials and Stack Overflow, I found the better solution was to create a regular expression to identify if a url had been entered and then **useState** to determine whether there was an error or not. I then created an input component which used props to render the border and placeholder styles based on inputError state.
 
-### Analyzing the Bundle Size
+Snippet:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```css
+&:invalid ~ ${ErrorMessage} {
+  display: block;
+}
+```
 
-### Making a Progressive Web App
+#### Cleaner mobile navigation 😺
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+In the past, when creating a modal-like mobile navigation, I ended up creating a separate navigation from desktop and then display mobile navigation when the hambuger is clicked. Whilst this has worked in the past with no issue I found that it is actually pretty easy to do this without creating a separate navigation which is much cleaner. The trick is to create logo first, hamburger second and then the navigation. Much simpler.
 
-### Advanced Configuration
+#### Axios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+First time using Axios, instead of fetch. I found the syntax is easier to manage.
 
-### Deployment
+#### Clipboard
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This was the first time I needed a button that would copy to clipboard. I came across the react copy-to-clipboard libary which is easy to set up and use.
 
-### `npm run build` fails to minify
+### Continued development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Build user authentication
+
+I have some projects I want to build that allows users to log in to an account, I think this would be a good project to practice building user authentication.
+
+#### CRUD app
+
+This could be updated to a real CRUD app, which would include updating, reordering and deleting individual links.
