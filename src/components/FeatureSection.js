@@ -42,6 +42,10 @@ const FeatureHeader = styled.h2`
   font-size: 1.75rem;
   margin-bottom: 1rem;
   text-align: center;
+
+  @media (${device.laptop}) {
+    font-size: 2.5rem;
+  }
 `;
 
 const FeatureDescription = styled.p`
