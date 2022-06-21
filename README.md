@@ -40,14 +40,14 @@ Added Features:
 
 ### 🔗 Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution](https://github.com/jkellerman/shortly)
+- Live Site URL: [Live](https://shrtly-app.netlify.app)
 
 ## My process
 
 I love working with css and whilst I've had fun using plain old css or scss, this was an opportunity to experiment with styled components which I must say seems like a step forward, particularly when building React applications. More times than not I will build applications with a mobile first workflow which felt even more natural when working with styled components. I styled each component completely across all breakpoints with functionality before moving onto the next. You will find the styles in their components file, I felt this made it easier to go back and forth between styles and JSX, which is more cumbersome when separating concern.
 
-All challenges were completed and I added some extra features which I thought were necessary, including adding a spinner on the 'Shorten It' button. This will show the client that their request is loading in case the API call takes longer than expected or their network speed is slow.
+All challenges were completed and I added some extra features which I thought were necessary, including adding a spinner on the 'Shorten It' button using pure css. This will show the client that their request is loading in case the API call takes longer than expected or their network speed is slow.
 
 I also added a feature where they can clear their links history, just in case it gets too long.
 
