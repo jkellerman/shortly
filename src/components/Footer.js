@@ -44,7 +44,7 @@ const LinkTitle = styled.li`
   margin-bottom: 1.375rem;
 `;
 
-const Link = styled.a`
+const Link = styled.li`
   text-decoration: none;
   font-size: 0.9375rem;
   color: #bfbfbf;
@@ -69,7 +69,7 @@ const IconsContainer = styled.div`
   }
 `;
 
-const SocialMediaIcon = styled.div`
+const SocialMediaIcon = styled.button`
   cursor: pointer;
   svg > path {
     &:hover {

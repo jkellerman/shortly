@@ -12,9 +12,6 @@ This is a solution to the [Shortly URL shortening API Challenge challenge on Fro
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
