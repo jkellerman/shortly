@@ -8,6 +8,8 @@ import ShortenedLink from "./ShortenedLink";
 import LoadingAnimation from "./LoadingAnimation";
 import LinkShortenerInput from "./LinkShortenerInput";
 
+const LinkShortenerContainer = styled.section``;
+
 const Background = styled.div`
   background-color: #3a3054;
   background-image: url("../images/bg-shorten-mobile.svg");
@@ -151,30 +153,32 @@ const LinkShortener = () => {
   });
 
   return (
-    <Container>
-      <Background>
-        <Form onSubmit={getShortenedLink}>
-          <Label htmlFor="input">Input:</Label>
-          <LinkShortenerInput
-            id="input"
-            type="url"
-            placeholder="Shorten a link here..."
-            autoComplete="off"
-            onChange={handleChange}
-            value={input}
-            error={inputError}
-          />
-          <ErrorMessage>{inputError}</ErrorMessage>
-          <Button type="submit" shortenIt secondary disabled={isLoading}>
-            {isLoading ? <LoadingAnimation /> : "Shorten It"}
-          </Button>
-        </Form>
-      </Background>
-      <List ref={listRef}>{links}</List>
-      {list.length > 0 && (
-        <ClearHistory onClick={clearHistory}>Clear History</ClearHistory>
-      )}
-    </Container>
+    <LinkShortenerContainer>
+      <Container>
+        <Background>
+          <Form onSubmit={getShortenedLink}>
+            <Label htmlFor="input">Input:</Label>
+            <LinkShortenerInput
+              id="input"
+              type="url"
+              placeholder="Shorten a link here..."
+              autoComplete="off"
+              onChange={handleChange}
+              value={input}
+              error={inputError}
+            />
+            <ErrorMessage>{inputError}</ErrorMessage>
+            <Button type="submit" shortenIt secondary disabled={isLoading}>
+              {isLoading ? <LoadingAnimation /> : "Shorten It"}
+            </Button>
+          </Form>
+        </Background>
+        <List ref={listRef}>{links}</List>
+        {list.length > 0 && (
+          <ClearHistory onClick={clearHistory}>Clear History</ClearHistory>
+        )}
+      </Container>
+    </LinkShortenerContainer>
   );
 };
 

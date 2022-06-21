@@ -21,7 +21,7 @@ const CTAContainer = styled.section`
   }
 `;
 
-const StyledCTA = styled.div`
+const StyledCTA = styled.h2`
   font-size: 1.75rem;
   font-weight: 700;
   color: #fff;

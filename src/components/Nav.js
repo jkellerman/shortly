@@ -127,9 +127,9 @@ const Nav = () => {
       </NavMenu>
       <NavContainer className={toggle ? "hide" : "show"}>
         <NavList>
-          <Link href="#">Features</Link>
-          <Link href="#">Pricing</Link>
-          <Link href="#">Resources</Link>
+          <Link>Features</Link>
+          <Link>Pricing</Link>
+          <Link>Resources</Link>
         </NavList>
         <Line />
         <LoginMenu>

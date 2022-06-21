@@ -94,8 +94,8 @@ const FeatureCardDescription = styled.p`
 
 const FeatureSection = () => {
   return (
-    <Container>
-      <FeatureSectionContainer>
+    <FeatureSectionContainer>
+      <Container>
         <StyledFeatureSection>
           <FeatureHeader>Advanced Statistics</FeatureHeader>
           <FeatureDescription>
@@ -106,7 +106,7 @@ const FeatureSection = () => {
         <FeatureCardContainer>
           <Line />
           <FeatureCard first>
-            <FeatureCardIcon src="../images/icon-brand-recognition.svg" />
+            <FeatureCardIcon bgImg={"../images/icon-brand-recognition.svg"} />
             <FeatureCardHeading>Brand Recognition</FeatureCardHeading>
             <FeatureCardDescription>
               Boost your brand recognition with each click. Generic links don’t
@@ -115,7 +115,7 @@ const FeatureSection = () => {
             </FeatureCardDescription>
           </FeatureCard>
           <FeatureCard second>
-            <FeatureCardIcon src="../images/icon-detailed-records.svg" />
+            <FeatureCardIcon bgImg={"../images/icon-detailed-records.svg"} />
             <FeatureCardHeading>Detailed Records</FeatureCardHeading>
             <FeatureCardDescription>
               Gain insights into who is clicking your links. Knowing when and
@@ -124,7 +124,7 @@ const FeatureSection = () => {
             </FeatureCardDescription>
           </FeatureCard>
           <FeatureCard third>
-            <FeatureCardIcon src="../images/icon-fully-customizable.svg" />
+            <FeatureCardIcon bgImg={"../images/icon-fully-customizable.svg"} />
             <FeatureCardHeading>Fully customisable</FeatureCardHeading>
             <FeatureCardDescription>
               Improve brand awareness and content discoverability through
@@ -132,8 +132,8 @@ const FeatureSection = () => {
             </FeatureCardDescription>
           </FeatureCard>
         </FeatureCardContainer>
-      </FeatureSectionContainer>
-    </Container>
+      </Container>
+    </FeatureSectionContainer>
   );
 };
 

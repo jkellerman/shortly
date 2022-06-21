@@ -11,10 +11,12 @@ const App = () => {
     <>
       <GlobalStyles />
       <Header />
-      <Hero />
-      <LinkShortener />
-      <FeatureSection />
-      <CTA />
+      <main>
+        <Hero />
+        <LinkShortener />
+        <FeatureSection />
+        <CTA />
+      </main>
       <Footer />
     </>
   );

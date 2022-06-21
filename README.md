@@ -93,3 +93,7 @@ I have some projects I want to build that allows users to log in to an account, 
 #### CRUD app
 
 This could be updated to a real CRUD app, which would include updating, reordering and deleting individual links.
+
+#### Create more global styles
+
+After going back into the project and making amendments, I realised some extra global styles for things like text color would be handy, similar to custom properties when using css/scss.
