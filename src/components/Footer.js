@@ -50,6 +50,7 @@ const Link = styled.li`
   color: #bfbfbf;
   margin-bottom: 0.625rem;
   list-style: none;
+  cursor: pointer;
 
   &:hover {
     transition: all 0.2s ease-in;

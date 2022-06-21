@@ -41,6 +41,7 @@ const NavMenu = styled.div`
 const Hamburger = styled.button`
   background-color: transparent;
   border: none;
+  cursor: pointer;
   @media (${device.tablet}) {
     display: none;
   }
