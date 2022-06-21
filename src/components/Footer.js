@@ -49,6 +49,7 @@ const Link = styled.li`
   font-size: 0.9375rem;
   color: #bfbfbf;
   margin-bottom: 0.625rem;
+  list-style: none;
 
   &:hover {
     transition: all 0.2s ease-in;
@@ -70,6 +71,9 @@ const IconsContainer = styled.div`
 `;
 
 const SocialMediaIcon = styled.button`
+  padding: 0.5rem 0;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
   svg > path {
     &:hover {

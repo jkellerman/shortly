@@ -3,8 +3,14 @@ import styled from "styled-components";
 import Button from "./Button";
 import { device } from "./Global.styles";
 import Logo from "./Logo";
+import Container from "./Container.styles";
 
 const StyledNav = styled.nav`
+  background-color: #fff;
+`;
+
+const NavContainer = styled.div`
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -32,16 +38,17 @@ const NavMenu = styled.div`
   }
 `;
 
-const Hamburger = styled.div`
+const Hamburger = styled.button`
+  background-color: transparent;
+  border: none;
   @media (${device.tablet}) {
     display: none;
   }
 `;
 
-const NavContainer = styled.div`
+const NavListContainer = styled.div`
   width: 100%;
   background-color: #3a3054;
-  display: none;
   position: absolute;
   top: 6rem;
   border-radius: 10px;
@@ -119,26 +126,33 @@ const Nav = () => {
   };
   return (
     <StyledNav>
-      <NavMenu>
-        <Logo header />
-        <Hamburger onClick={toggleMenu}>
-          <img src="../images/icon-hamburger.svg" alt="hamburger" />
-        </Hamburger>
-      </NavMenu>
-      <NavContainer className={toggle ? "hide" : "show"}>
-        <NavList>
-          <Link>Features</Link>
-          <Link>Pricing</Link>
-          <Link>Resources</Link>
-        </NavList>
-        <Line />
-        <LoginMenu>
-          <Button login>Login</Button>
-          <Button primary nav>
-            Sign Up
-          </Button>
-        </LoginMenu>
-      </NavContainer>
+      <Container>
+        <NavContainer>
+          <NavMenu>
+            <Logo header />
+            <Hamburger onClick={toggleMenu}>
+              <img
+                src="../images/icon-hamburger.svg"
+                alt="toggle mobile menu"
+              />
+            </Hamburger>
+          </NavMenu>
+          <NavListContainer className={toggle ? "hide" : "show"}>
+            <NavList>
+              <Link>Features</Link>
+              <Link>Pricing</Link>
+              <Link>Resources</Link>
+            </NavList>
+            <Line />
+            <LoginMenu>
+              <Button login>Login</Button>
+              <Button primary nav>
+                Sign Up
+              </Button>
+            </LoginMenu>
+          </NavListContainer>
+        </NavContainer>
+      </Container>
     </StyledNav>
   );
 };
