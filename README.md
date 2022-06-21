@@ -81,7 +81,7 @@ First time using Axios, instead of fetch. I found the syntax is easier to manage
 
 This was the first time I needed a button that would copy to clipboard. I came across the react copy-to-clipboard libary which is easy to set up and use.
 
-### Continued development
+### 👨‍💻 Continued development
 
 #### Build user authentication
 
