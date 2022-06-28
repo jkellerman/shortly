@@ -25,7 +25,6 @@ const Background = styled.div`
     justify-content: space-between;
     top: -4rem;
     padding: 3.25rem 4rem;
-    margin-bottom: 5rem;
   }
 `;
 
