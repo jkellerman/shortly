@@ -114,17 +114,15 @@ const LinkShortener = () => {
             originalLink: resp.data.result.original_link,
             shortenedLink: resp.data.result.full_short_link2,
           };
-          setTimeout(() => {
-            setList([...list].concat(listItem));
-            setIsLoading(false);
-            setInputError(error);
-            if (list.length >= 2) {
-              listRef.current.scrollIntoView({
-                block: "nearest",
-                behaviour: "smooth",
-              });
-            }
-          }, 1000);
+          setList([...list].concat(listItem));
+          setIsLoading(false);
+          setInputError(error);
+          if (list.length >= 2) {
+            listRef.current.scrollIntoView({
+              block: "nearest",
+              behaviour: "smooth",
+            });
+          }
         });
     } else {
       setIsLoading(false);
